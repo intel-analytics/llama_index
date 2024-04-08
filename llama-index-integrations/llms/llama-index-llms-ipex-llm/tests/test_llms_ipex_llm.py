@@ -26,9 +26,9 @@ def completion_to_prompt(completion):
 template = """<s>[INST] <<SYS>>\n    \n<</SYS>>\n\n{query_str} [/INST]"""
 
 def test_text_complete_ipex_llm():
-    model_name = "/mnt/disk1/models/Llama-2-7b-chat-hf"
+    model_name = "meta/Llama-2-7b-chat-hf"
     low_bit = "sym_int4"
-    llm = IpexLLM(
+    llm = IpexLLM.from_model_id(
         model_name=model_name,
         tokenizer_name=model_name,
         context_window=512,
@@ -41,7 +41,6 @@ def test_text_complete_ipex_llm():
     )
 
     res = llm.complete("What is AI")
-    print(res)
     assert res is not None
 
 test_text_complete_ipex_llm()
