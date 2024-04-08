@@ -1,9 +1,9 @@
 import logging
 from threading import Thread
-from typing import Any, Callable, List, Optional, Sequence
+from typing import Any, Callable, Dict, List, Optional, Sequence, Union
 
 import torch
-
+from llama_index.core.prompts.base import PromptTemplate
 from llama_index.core.base.llms.types import (
     ChatMessage,
     ChatResponse,
@@ -83,6 +83,14 @@ class IpexLLM(CustomLLM):
         description="The maximum number of tokens to generate.",
         gt=0,
     )
+    query_wrapper_prompt: PromptTemplate = Field(
+        default=PromptTemplate("{query_str}"),
+        description=(
+            "The query wrapper prompt, containing the query placeholder. "
+            "The model card on HuggingFace should specify if this is needed. "
+            "Should contain a `{query_str}` placeholder."
+        ),
+    )
     tokenizer_name: str = Field(
         default=DEFAULT_HUGGINGFACE_MODEL,
         description=(
@@ -136,6 +144,7 @@ class IpexLLM(CustomLLM):
         self,
         context_window: int = DEFAULT_CONTEXT_WINDOW,
         max_new_tokens: int = DEFAULT_NUM_OUTPUTS,
+        query_wrapper_prompt: Union[str, PromptTemplate]="{query_str}",
         tokenizer_name: str = DEFAULT_HUGGINGFACE_MODEL,
         model_name: str = DEFAULT_HUGGINGFACE_MODEL,
         load_in_4bit: Optional[bool] = True,
@@ -276,12 +285,16 @@ class IpexLLM(CustomLLM):
 
         self._stopping_criteria = StoppingCriteriaList([StopOnTokens()])
 
+        if isinstance(query_wrapper_prompt, str):
+            query_wrapper_prompt = PromptTemplate(query_wrapper_prompt)
+
         messages_to_prompt = messages_to_prompt or self._tokenizer_messages_to_prompt
 
         super().__init__(
             context_window=context_window,
             max_new_tokens=max_new_tokens,
             tokenizer_name=tokenizer_name,
+            query_wrapper_prompt=query_wrapper_prompt,
             model_name=model_name,
             device_map=device_map,
             stopping_ids=stopping_ids or [],
