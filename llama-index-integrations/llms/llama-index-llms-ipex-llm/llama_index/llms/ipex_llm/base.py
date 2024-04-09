@@ -333,6 +333,7 @@ class IpexLLM(CustomLLM):
         pydantic_program_mode: PydanticProgramMode=PydanticProgramMode.DEFAULT,
         output_parser: Optional[BaseOutputParser] = None,
         load_in_low_bit: Optional[str] = None,
+        load_in_4bit: Optional[bool] = True,
     ):
         """
         Construct IPEX-LLM from HuggingFace Model.
@@ -374,6 +375,8 @@ class IpexLLM(CustomLLM):
             tokenizer_name=tokenizer_name,
             model_name=model_name,
             device_map=device_map,
+            stopping_ids=stopping_ids,
+            tokenizer_outputs_to_remove=tokenizer_outputs_to_remove,
             tokenizer_kwargs=tokenizer_kwargs,
             model_kwargs=model_kwargs,
             generate_kwargs=generate_kwargs,
@@ -381,6 +384,10 @@ class IpexLLM(CustomLLM):
             callback_manager=callback_manager,
             completion_to_prompt=completion_to_prompt,
             messages_to_prompt=messages_to_prompt,
+            load_in_low_bit=load_in_low_bit,
+            load_in_4bit=load_in_4bit,
+            pydantic_program_mode=pydantic_program_mode,
+            output_parser=output_parser
         )
 
     @classmethod
@@ -406,6 +413,7 @@ class IpexLLM(CustomLLM):
         pydantic_program_mode: PydanticProgramMode=PydanticProgramMode.DEFAULT,
         output_parser: Optional[BaseOutputParser] = None,
         load_in_low_bit: Optional[str] = None,
+        load_in_4bit: Optional[bool] = True,
     ):
         """
         Construct IPEX-LLM from HuggingFace Model low-bit checkpoint.
@@ -447,6 +455,8 @@ class IpexLLM(CustomLLM):
             tokenizer_name=tokenizer_name,
             model_name=model_name,
             device_map=device_map,
+            stopping_ids=stopping_ids,
+            tokenizer_outputs_to_remove=tokenizer_outputs_to_remove,
             tokenizer_kwargs=tokenizer_kwargs,
             model_kwargs=model_kwargs,
             generate_kwargs=generate_kwargs,
@@ -454,7 +464,10 @@ class IpexLLM(CustomLLM):
             callback_manager=callback_manager,
             completion_to_prompt=completion_to_prompt,
             messages_to_prompt=messages_to_prompt,
-            load_low_bit=True,
+            load_in_low_bit=load_in_low_bit,
+            load_in_4bit=load_in_4bit,
+            pydantic_program_mode=pydantic_program_mode,
+            output_parser=output_parser
         )
     
     @classmethod
