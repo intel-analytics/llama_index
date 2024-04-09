@@ -1,6 +1,6 @@
 import logging
 from threading import Thread
-from typing import Any, Callable, Dict, List, Optional, Sequence, Union
+from typing import Any, Callable, List, Optional, Sequence, Union
 
 import torch
 from llama_index.core.prompts.base import PromptTemplate
@@ -144,7 +144,7 @@ class IpexLLM(CustomLLM):
         self,
         context_window: int = DEFAULT_CONTEXT_WINDOW,
         max_new_tokens: int = DEFAULT_NUM_OUTPUTS,
-        query_wrapper_prompt: Union[str, PromptTemplate]="{query_str}",
+        query_wrapper_prompt: Union[str, PromptTemplate] = "{query_str}",
         tokenizer_name: str = DEFAULT_HUGGINGFACE_MODEL,
         model_name: str = DEFAULT_HUGGINGFACE_MODEL,
         load_in_4bit: Optional[bool] = True,
@@ -315,7 +315,7 @@ class IpexLLM(CustomLLM):
         cls,
         context_window: int = DEFAULT_CONTEXT_WINDOW,
         max_new_tokens: int = DEFAULT_NUM_OUTPUTS,
-        query_wrapper_prompt: Union[str, PromptTemplate]="{query_str}",
+        query_wrapper_prompt: Union[str, PromptTemplate] = "{query_str}",
         tokenizer_name: str = DEFAULT_HUGGINGFACE_MODEL,
         model_name: str = DEFAULT_HUGGINGFACE_MODEL,
         model: Optional[Any] = None,
@@ -328,9 +328,9 @@ class IpexLLM(CustomLLM):
         generate_kwargs: Optional[dict] = None,
         is_chat_model: Optional[bool] = False,
         callback_manager: Optional[CallbackManager] = None,
-        messages_to_prompt: Optional[Callable[[Sequence[ChatMessage]], str]]=None,
-        completion_to_prompt: Optional[Callable[[str], str]]=None,
-        pydantic_program_mode: PydanticProgramMode=PydanticProgramMode.DEFAULT,
+        messages_to_prompt: Optional[Callable[[Sequence[ChatMessage]], str]] = None,
+        completion_to_prompt: Optional[Callable[[str], str]] = None,
+        pydantic_program_mode: PydanticProgramMode = PydanticProgramMode.DEFAULT,
         output_parser: Optional[BaseOutputParser] = None,
         load_in_low_bit: Optional[str] = None,
         load_in_4bit: Optional[bool] = True,
@@ -339,7 +339,6 @@ class IpexLLM(CustomLLM):
         Construct IPEX-LLM from HuggingFace Model.
 
         Args:
-
             context_window: The maximum number of tokens available for input.
             max_new_tokens: The maximum number of tokens to generate.
             query_wrapper_prompt: The query wrapper prompt, containing the query placeholder.
@@ -387,7 +386,7 @@ class IpexLLM(CustomLLM):
             load_in_low_bit=load_in_low_bit,
             load_in_4bit=load_in_4bit,
             pydantic_program_mode=pydantic_program_mode,
-            output_parser=output_parser
+            output_parser=output_parser,
         )
 
     @classmethod
@@ -395,7 +394,7 @@ class IpexLLM(CustomLLM):
         cls,
         context_window: int = DEFAULT_CONTEXT_WINDOW,
         max_new_tokens: int = DEFAULT_NUM_OUTPUTS,
-        query_wrapper_prompt: Union[str, PromptTemplate]="{query_str}",
+        query_wrapper_prompt: Union[str, PromptTemplate] = "{query_str}",
         tokenizer_name: str = DEFAULT_HUGGINGFACE_MODEL,
         model_name: str = DEFAULT_HUGGINGFACE_MODEL,
         model: Optional[Any] = None,
@@ -408,9 +407,9 @@ class IpexLLM(CustomLLM):
         generate_kwargs: Optional[dict] = None,
         is_chat_model: Optional[bool] = False,
         callback_manager: Optional[CallbackManager] = None,
-        messages_to_prompt: Optional[Callable[[Sequence[ChatMessage]], str]]=None,
-        completion_to_prompt: Optional[Callable[[str], str]]=None,
-        pydantic_program_mode: PydanticProgramMode=PydanticProgramMode.DEFAULT,
+        messages_to_prompt: Optional[Callable[[Sequence[ChatMessage]], str]] = None,
+        completion_to_prompt: Optional[Callable[[str], str]] = None,
+        pydantic_program_mode: PydanticProgramMode = PydanticProgramMode.DEFAULT,
         output_parser: Optional[BaseOutputParser] = None,
         load_in_low_bit: Optional[str] = None,
         load_in_4bit: Optional[bool] = True,
@@ -419,7 +418,6 @@ class IpexLLM(CustomLLM):
         Construct IPEX-LLM from HuggingFace Model low-bit checkpoint.
 
         Args:
-
             context_window: The maximum number of tokens available for input.
             max_new_tokens: The maximum number of tokens to generate.
             query_wrapper_prompt: The query wrapper prompt, containing the query placeholder.
@@ -467,9 +465,9 @@ class IpexLLM(CustomLLM):
             load_in_low_bit=load_in_low_bit,
             load_in_4bit=load_in_4bit,
             pydantic_program_mode=pydantic_program_mode,
-            output_parser=output_parser
+            output_parser=output_parser,
         )
-    
+
     @classmethod
     def class_name(cls) -> str:
         return "IpexLLM"

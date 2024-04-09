@@ -1,5 +1,5 @@
-from llama_index.core.base.llms.base import BaseLLM
 from llama_index.llms.ipex_llm import IpexLLM
+
 
 def messages_to_prompt(messages):
     assert 0
@@ -15,15 +15,18 @@ def messages_to_prompt(messages):
             prompt += f"\n{message.content} "
 
     # add final assistant prompt
-    prompt = prompt + "[/INST]"
+    prompt += "[/INST]"
 
     return prompt
+
 
 def completion_to_prompt(completion):
     print("completion_to_prompt")
     return f"<s>[INST] <<SYS>>\n    \n<</SYS>>\n\n{completion} [/INST]"
 
+
 template = """<s>[INST] <<SYS>>\n    \n<</SYS>>\n\n{query_str} [/INST]"""
+
 
 def test_text_complete_ipex_llm():
     model_name = "meta/Llama-2-7b-chat-hf"
@@ -42,5 +45,3 @@ def test_text_complete_ipex_llm():
 
     res = llm.complete("What is AI")
     assert res is not None
-
-test_text_complete_ipex_llm()
