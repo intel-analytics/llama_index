@@ -38,8 +38,8 @@ if __name__ == "__main__":
         "-d",
         type=str,
         default="xpu",
-        choices=["cpu","xpu","auto"],
-        help="The device the model will run on."
+        choices=["cpu", "xpu", "auto"],
+        help="The device the model will run on.",
     )
 
     args = parser.parse_args()
