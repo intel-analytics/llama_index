@@ -57,7 +57,7 @@ if __name__ == "__main__":
         load_in_low_bit=low_bit,
         completion_to_prompt=completion_to_prompt,
         generate_kwargs={"do_sample": False},
-        device_map=device
+        device_map=device,
     )
 
     print(
